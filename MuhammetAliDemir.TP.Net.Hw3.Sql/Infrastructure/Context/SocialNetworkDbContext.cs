@@ -1,6 +1,13 @@
-﻿namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
 {
-    public class SocialNetworkDbContext
+    public class SocialNetworkDbContext : DbContext
     {
+        public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
+        {
+        }
+
+
     }
 }
