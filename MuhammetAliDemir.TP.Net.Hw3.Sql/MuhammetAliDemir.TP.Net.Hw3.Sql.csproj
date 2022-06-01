@@ -18,9 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Application\Interfaces\" />
-    <Folder Include="Domain\Entity\" />
     <Folder Include="Infrastructure\DependencyContainer\" />
-    <Folder Include="Infrastructure\Migrations\" />
   </ItemGroup>
 
 </Project>
