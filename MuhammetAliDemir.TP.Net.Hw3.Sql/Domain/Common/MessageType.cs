@@ -5,8 +5,6 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 {
     public class MessageType
     {
-        public int Id { get; set; }
-
         public int MessageTypeId { get; set; }
 
         [ForeignKey("MessageTypeId")]
@@ -17,6 +15,9 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 
         [ForeignKey("MessageTypeId")]
         public GroupMessage GroupMessage { get; set; }
+
+        [ForeignKey("MessageTypeId")]
+        public GroupMessageArchive GroupMessageArchive { get; set; }
 
         public string MessageTypeName { get; set; }
     }

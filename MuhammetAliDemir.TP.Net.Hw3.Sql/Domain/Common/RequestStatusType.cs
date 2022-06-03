@@ -5,7 +5,6 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 {
     public class RequestStatusType
     {
-        public int Id { get; set; }
         public int RequestStatusId { get; set; }
 
         [ForeignKey("RequestStatusId")]

@@ -5,7 +5,6 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 {
     public class CommentType
     {
-        public int Id { get; set; }
         public int CommentTypeId { get; set; }
 
         [ForeignKey("CommentTypeId")]
