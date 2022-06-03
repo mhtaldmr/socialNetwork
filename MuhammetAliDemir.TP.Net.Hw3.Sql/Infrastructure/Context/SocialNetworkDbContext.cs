@@ -26,6 +26,11 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
         public DbSet<MessageType> MessageTypes { get; set; }
         public DbSet<RequestStatusType> RequestStatusTypes { get; set; }
 
-     
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+        }
+
     }
 }
