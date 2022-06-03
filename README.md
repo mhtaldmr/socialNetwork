@@ -36,7 +36,7 @@ This project is an example of using MSSQL and SQL Queries.
 ## Design
 - Database Tables and Connections
  <br>
-<img src="https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/design.PNG" alt="design" />
+<img src="https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/SocialNetworkDB.png" alt="design" />
 
 ## Queries
 - Writing 3 query for requirements.
