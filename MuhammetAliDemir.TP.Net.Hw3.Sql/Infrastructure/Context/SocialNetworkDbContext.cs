@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common;
 using MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity;
 
 namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
@@ -10,5 +11,20 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
+        public DbSet<UserMessageArchive> UserMessageArchives { get; set; }
+        public DbSet<UserPost> UserPosts { get; set; }
+        public DbSet<UserPostComment> UserPostsComments { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<FriendshipRequest> FriendshipRequests { get; set; }
+        public DbSet<FriendshipApproval> FriendshipApprovals { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupMessage> GroupMessages { get; set; }
+        public DbSet<GroupMembership> GroupMemberships { get; set; }
+        public DbSet<GroupMessageArchive> GroupMessageArchives { get; set; }
+        public DbSet<CommentType> CommentTypes { get; set; }
+        public DbSet<MessageType> MessageTypes { get; set; }
+        public DbSet<RequestStatusType> RequestStatusTypes { get; set; }
+
     }
 }
