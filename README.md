@@ -26,7 +26,7 @@ This project is an example of using MSSQL and SQL Queries.
 - To reach the project folder :
 ```
     cd socialnetworkDb-.net
-    cd MuhammetAliDemir.TP.Net.Hw2.Part2
+    cd MuhammetAliDemir.TP.Net.Hw3.Sql
 ```
 - For Creating the DB and sending datas : 
 ```
