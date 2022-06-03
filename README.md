@@ -1,5 +1,4 @@
-
-# TP .Net Week 3 SQL
+# Social Network DB Created.
 
 This project is an example of using MSSQL and SQL Queries.
 
@@ -22,11 +21,11 @@ This project is an example of using MSSQL and SQL Queries.
 
 - To get the project :
 ```
-    git clone https://github.com/186-Teleperformans-Net-Bootcamp/hafta3-mhtaldmr.git
+    git clone https://github.com/mhtaldmr/socialnetworkDb-.net.git
 ```
 - To reach the project folder :
 ```
-    cd hafta2-2-mhtaldmr 
+    cd socialnetworkDb-.net
     cd MuhammetAliDemir.TP.Net.Hw2.Part2
 ```
 - For Creating the DB and sending datas : 
@@ -37,12 +36,12 @@ This project is an example of using MSSQL and SQL Queries.
 ## Design
 - Database Tables and Connections
  <br>
-<img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta3-mhtaldmr/blob/main/design.PNG" alt="design" />
+<img src="https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/design.PNG" alt="design" />
 
 ## Queries
 - Writing 3 query for requirements.
-	- For updating messages a [TRIGGER](https://github.com/186-Teleperformans-Net-Bootcamp/hafta3-mhtaldmr/blob/main/TriggerMessageUpdate.sql) created for Inserting a Message Archive ***BEFORE*** action and then updated.
-	- For friend request a [TRIGGER](https://github.com/186-Teleperformans-Net-Bootcamp/hafta3-mhtaldmr/blob/main/TriggerAfterFriedRequest.sql) created for Inserting a FriendshipApproval ***AFTER*** request action.
-	- For Max message senders a [PROCEDURE](https://github.com/186-Teleperformans-Net-Bootcamp/hafta3-mhtaldmr/blob/main/GetMaxNumberOfMessageSenders.sql) created.
+	- For updating messages a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/TriggerMessageUpdate.sql) created for Inserting a Message Archive ***BEFORE*** action and then updated.
+	- For friend request a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/TriggerAfterFriedRequest.sql) created for Inserting a FriendshipApproval ***AFTER*** request action.
+	- For Max message senders a [PROCEDURE](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/GetMaxNumberOfMessageSenders.sql) created.
 
 ---
