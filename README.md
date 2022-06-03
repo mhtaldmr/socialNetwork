@@ -40,8 +40,8 @@ This project is an example of using MSSQL and SQL Queries.
 
 ## Queries
 - Writing 3 query for requirements.
-	- For updating messages a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/TriggerMessageUpdate.sql) created for Inserting a Message Archive ***BEFORE*** action and then updated.
-	- For friend request a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/TriggerAfterFriedRequest.sql) created for Inserting a FriendshipApproval ***AFTER*** request action.
-	- For Max message senders a [PROCEDURE](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/GetMaxNumberOfMessageSenders.sql) created.
+	- For updating messages a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/TriggerMessageUpdate.sql) created for Inserting a Message Archive ***BEFORE*** action and then updated.
+	- For friend request a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/TriggerAfterFriedRequest.sql) created for Inserting a FriendshipApproval ***AFTER*** request action.
+	- For Max message senders a [PROCEDURE](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/GetMaxNumberOfMessageSenders.sql) created.
 
 ---
