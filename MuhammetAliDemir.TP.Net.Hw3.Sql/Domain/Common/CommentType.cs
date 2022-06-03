@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity
+namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 {
     public class CommentType
     {
