@@ -5,6 +5,7 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common
 {
     public class MessageType
     {
+        public int Id { get; set; }
         public int MessageTypeId { get; set; }
 
         [ForeignKey("MessageTypeId")]

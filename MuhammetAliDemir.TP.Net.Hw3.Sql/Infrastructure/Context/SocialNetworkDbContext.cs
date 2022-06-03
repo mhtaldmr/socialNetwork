@@ -24,7 +24,6 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
         public DbSet<GroupMessageArchive> GroupMessagesArchive { get; set; }
         public DbSet<CommentType> CommentTypes { get; set; }
         public DbSet<MessageType> MessageTypes { get; set; }
-        public DbSet<RequestStatusType> RequestStatusTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
