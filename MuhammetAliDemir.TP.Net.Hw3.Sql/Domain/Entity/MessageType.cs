@@ -2,7 +2,7 @@
 
 namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity
 {
-    public class UserMessageType
+    public class MessageType
     {
         public int Id { get; set; }
 
@@ -12,7 +12,10 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity
         public UserMessage UserMessage { get; set; }
 
         [ForeignKey("MessageTypeId")]
-        public UserMessageArchive UserMessageArchive{ get; set; }
+        public UserMessageArchive UserMessageArchive { get; set; }
+
+        [ForeignKey("MessageTypeId")]
+        public GroupMessage GroupMessage { get; set; }
 
         public string MessageTypeName { get; set; }
     }
