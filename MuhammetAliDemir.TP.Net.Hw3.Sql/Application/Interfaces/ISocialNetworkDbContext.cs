@@ -1,16 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MuhammetAliDemir.TP.Net.Hw3.Sql.Application.Interfaces;
 using MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Common;
 using MuhammetAliDemir.TP.Net.Hw3.Sql.Domain.Entity;
 
-namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
+namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Application.Interfaces
 {
-    public class SocialNetworkDbContext : DbContext, ISocialNetworkDbContext
+    public interface ISocialNetworkDbContext
     {
-        public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
-        {
-        }
-
         public DbSet<User> Users { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<UserMessageArchive> UserMessagesArchive { get; set; }
@@ -25,12 +20,5 @@ namespace MuhammetAliDemir.TP.Net.Hw3.Sql.Infrastructure.Context
         public DbSet<GroupMessageArchive> GroupMessagesArchive { get; set; }
         public DbSet<CommentType> CommentTypes { get; set; }
         public DbSet<MessageType> MessageTypes { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        }
-
     }
 }
