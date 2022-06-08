@@ -9,8 +9,8 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
         public static IServiceCollection AddInfractructureServices(this IServiceCollection services,IConfiguration configuration)
         {
             //Adding the dbcontext for entityframework
-            var config = configuration.GetConnectionString("default");
-            services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(config));
+            var connectionString = configuration.GetConnectionString("default");
+            services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
 
