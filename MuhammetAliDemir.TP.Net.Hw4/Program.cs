@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
 using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 //Adding the dbcontext for entityframework
 var configuration = builder.Configuration.GetConnectionString("default");
 builder.Services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(configuration));
+
+builder.Services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
 
 
 builder.Services.AddEndpointsApiExplorer();
