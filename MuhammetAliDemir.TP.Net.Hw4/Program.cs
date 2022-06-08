@@ -1,19 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
-using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
+using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddInfractructureServices(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
-//Adding the dbcontext for entityframework
-var configuration = builder.Configuration.GetConnectionString("default");
-builder.Services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(configuration));
-
-builder.Services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
 
 
 builder.Services.AddEndpointsApiExplorer();
