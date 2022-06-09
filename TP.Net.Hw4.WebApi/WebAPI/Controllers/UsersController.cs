@@ -17,7 +17,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.WebAPI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        public IActionResult GetAllUsers()
         {
             var users = _socialNetworkDbContext.Users;
 

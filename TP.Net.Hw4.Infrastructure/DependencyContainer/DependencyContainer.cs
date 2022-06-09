@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
 using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
 
