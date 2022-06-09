@@ -1,16 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
 using MuhammetAliDemir.TP.Net.Hw4.Domain.Common;
 using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
 
 namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context
 {
-    public class SocialNetworkDbContext : DbContext, ISocialNetworkDbContext
+    public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>, ISocialNetworkDbContext
     {
         public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
         {
         }
-
+         
         public DbSet<User> Users { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<UserMessageArchive> UserMessagesArchive { get; set; }
@@ -28,8 +30,20 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            
+
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
+
+
+            //modelBuilder.Entity<IdentityUserLogin<string>>(eb => eb.HasNoKey());
+            //modelBuilder.Entity<IdentityUserRole<string>>(eb => eb.HasNoKey());
+            //modelBuilder.Entity<IdentityUserToken<string>>(eb => eb.HasNoKey());
+
         }
 
     }

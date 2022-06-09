@@ -12,7 +12,9 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
             var connectionString = configuration.GetConnectionString("default");
             services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(connectionString));
 
+            //Signing the implementations of ISocialNetworkDBContext interface.
             services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
+
 
             return services;
         }
