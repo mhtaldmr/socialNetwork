@@ -24,7 +24,7 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("authorization")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userRepository.GetUserAll();
@@ -35,6 +35,36 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 
             return Ok(userDto);            
         }
+
+
+        [HttpGet("inmemorycache")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllUsersByInMemory()
+        {
+            var users = await _userRepository.GetUserAll();
+            if (users is null)
+                return NotFound();
+
+            var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+
+            return Ok(userDto);
+        }
+
+
+        [HttpGet("distributedcache")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllUsersByDistributed()
+        {
+            var users = await _userRepository.GetUserAll();
+            if (users is null)
+                return NotFound();
+
+            var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+
+            return Ok(userDto);
+        }
+
+
 
 
         //[HttpPost]
