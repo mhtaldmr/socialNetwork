@@ -62,6 +62,16 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
                     .AddJwtBearer(opt => opt.TokenValidationParameters = tokenValidationParameters);
 
 
+            //InMemoryCaching
+            services.AddMemoryCache();
+
+            //DistributedCaching //Redis
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "RedisCacheServer";
+                options.Configuration = "localhost";
+            });
+
 
 
             return services;
