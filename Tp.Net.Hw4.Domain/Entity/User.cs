@@ -5,7 +5,8 @@ namespace TP.Net.Hw4.Domain.Entity
 {
     public class User : IdentityUser<int>
     {
-        public string UserSurName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public DateTime RegisteredAt { get; set; }
         public bool IsActive { get; set; }
     }

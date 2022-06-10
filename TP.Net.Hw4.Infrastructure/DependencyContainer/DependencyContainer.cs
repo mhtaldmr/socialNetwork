@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using TP.Net.Hw4.Application.Interfaces.Context;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Infrastructure.Context;
@@ -25,7 +24,6 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 
 
             //Interface signing.
-            services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
 

@@ -8,7 +8,7 @@ using TP.Net.Hw4.Infrastructure.Context;
 
 #nullable disable
 
-namespace TP.Net.Hw4.Migrations
+namespace TP.Net.Hw4.Infrastructure.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
     partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
@@ -399,8 +399,16 @@ namespace TP.Net.Hw4.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -437,10 +445,6 @@ namespace TP.Net.Hw4.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("UserSurName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TP.Net.Hw4.Domain.Common;
 using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Application.Interfaces.Context;
+
 
 namespace TP.Net.Hw4.Infrastructure.Context
 {
-    public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>, ISocialNetworkDbContext
+    public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>
     {
         public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
         {
@@ -38,11 +37,6 @@ namespace TP.Net.Hw4.Infrastructure.Context
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
-
-
-            //modelBuilder.Entity<IdentityUserLogin<string>>(eb => eb.HasNoKey());
-            //modelBuilder.Entity<IdentityUserRole<string>>(eb => eb.HasNoKey());
-            //modelBuilder.Entity<IdentityUserToken<string>>(eb => eb.HasNoKey());
 
         }
 

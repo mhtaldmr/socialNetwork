@@ -42,7 +42,10 @@ namespace TP.Net.Hw4.WebApi.Controllers
                 Email = signup.Email,
                 PasswordHash = signup.Password,
                 UserName = signup.UserName,
-                UserSurName = signup.UserSurName
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                RegisteredAt = DateTime.Now,
+                IsActive = true
             };
 
             var IsCreated = await _userManager.CreateAsync(newUser, signup.Password);
