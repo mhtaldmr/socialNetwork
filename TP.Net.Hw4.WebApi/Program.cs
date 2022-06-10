@@ -1,5 +1,7 @@
-using MuhammetAliDemir.TP.Net.Hw4.Application.DependencyContainer;
-using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer;
+using System.Reflection;
+using TP.Net.Hw4.Application.DependencyContainer;
+using TP.Net.Hw4.Infrastructure.DependencyContainer;
+using TP.Net.Hw4.Infrastructure.MappingProfile;
 using TP.Net.Hw4.WebApi.Dependency_Container;
 
 var builder = WebApplication.CreateBuilder(args);

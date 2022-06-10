@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Domain.Common
+namespace TP.Net.Hw4.Domain.Common
 {
     public abstract class BaseEntity
     {

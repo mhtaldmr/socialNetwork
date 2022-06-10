@@ -3,13 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
+using TP.Net.Hw4.Infrastructure.Context;
 using System.Text;
 using TP.Net.Hw4.Application.Interfaces.Context;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 using TP.Net.Hw4.Infrastructure.Repositories;
+using System.Reflection;
+using TP.Net.Hw4.Infrastructure.MappingProfile;
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
+namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 {
     public static class DependencyContainer
     {
@@ -25,6 +27,8 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
 
+            //Mapping
+            services.AddAutoMapper(typeof(Mapping));
 
             //TokenValidationParameter Object
             TokenValidationParameters tokenValidationParameters = new()

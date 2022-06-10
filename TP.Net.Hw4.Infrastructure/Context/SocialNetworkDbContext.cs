@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MuhammetAliDemir.TP.Net.Hw4.Domain.Common;
-using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
+using TP.Net.Hw4.Domain.Common;
+using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Application.Interfaces.Context;
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context
+namespace TP.Net.Hw4.Infrastructure.Context
 {
     public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>, ISocialNetworkDbContext
     {

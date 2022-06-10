@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
+namespace TP.Net.Hw4.Migrations
 {
     public partial class FirstMigration : Migration
     {

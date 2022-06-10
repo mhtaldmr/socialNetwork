@@ -1,6 +1,6 @@
 ﻿
 
-using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
+using TP.Net.Hw4.Domain.Entity;
 
 namespace TP.Net.Hw4.Application.Interfaces.Repositories
 {

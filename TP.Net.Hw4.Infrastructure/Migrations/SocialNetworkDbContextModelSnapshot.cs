@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
+using TP.Net.Hw4.Infrastructure.Context;
 
 #nullable disable
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
+namespace TP.Net.Hw4.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
     partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
@@ -125,7 +125,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Common.CommentType", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Common.CommentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,7 +147,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("CommentTypes");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Common.MessageType", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Common.MessageType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,7 +169,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("MessageTypes");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Friendship", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.Friendship", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +201,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("Friendships");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.FriendshipApproval", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.FriendshipApproval", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -222,7 +222,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("FriendshipApprovals");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.FriendshipRequest", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.FriendshipRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -251,7 +251,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("FriendshipRequests");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Group", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -283,7 +283,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMembership", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.GroupMembership", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -315,7 +315,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("GroupMemberships");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMessage", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.GroupMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +351,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("GroupMessages");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMessageArchive", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.GroupMessageArchive", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -377,7 +377,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("GroupMessagesArchive");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -455,7 +455,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserMessage", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -491,7 +491,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("UserMessages");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserMessageArchive", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserMessageArchive", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -517,7 +517,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("UserMessagesArchive");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPost", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -548,7 +548,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("UserPosts");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPostComment", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserPostComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +578,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.ToTable("UserPostsComments");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserRole", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -610,7 +610,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserRole", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -619,7 +619,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -628,7 +628,7 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -637,13 +637,13 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserRole", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -652,16 +652,16 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", null)
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Common.CommentType", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Common.CommentType", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPostComment", "UserPostComment")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserPostComment", "UserPostComment")
                         .WithMany()
                         .HasForeignKey("CommentTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -670,27 +670,27 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("UserPostComment");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Common.MessageType", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Common.MessageType", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMessage", "GroupMessage")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.GroupMessage", "GroupMessage")
                         .WithMany()
                         .HasForeignKey("MessageTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMessageArchive", "GroupMessageArchive")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.GroupMessageArchive", "GroupMessageArchive")
                         .WithMany()
                         .HasForeignKey("MessageTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserMessage", "UserMessage")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserMessage", "UserMessage")
                         .WithMany()
                         .HasForeignKey("MessageTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserMessageArchive", "UserMessageArchive")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserMessageArchive", "UserMessageArchive")
                         .WithMany()
                         .HasForeignKey("MessageTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -705,15 +705,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("UserMessageArchive");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Friendship", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.Friendship", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Source")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Source")
                         .WithMany()
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Target")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -724,9 +724,9 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("Target");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.FriendshipApproval", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.FriendshipApproval", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.FriendshipRequest", "FriendshipRequest")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.FriendshipRequest", "FriendshipRequest")
                         .WithMany()
                         .HasForeignKey("FriendshipRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -735,15 +735,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("FriendshipRequest");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.FriendshipRequest", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.FriendshipRequest", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Receiver")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Sender")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -754,9 +754,9 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Group", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.Group", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Admin")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Admin")
                         .WithMany()
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -765,15 +765,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("Admin");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMembership", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.GroupMembership", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Group", "Group")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "User")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -784,15 +784,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.GroupMessage", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.GroupMessage", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.Group", "Group")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "User")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -803,15 +803,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserMessage", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserMessage", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Receiver")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "Sender")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -822,9 +822,9 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPost", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserPost", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "User")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -833,15 +833,15 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPostComment", b =>
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserPostComment", b =>
                 {
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.User", "User")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MuhammetAliDemir.TP.Net.Hw4.Domain.Entity.UserPost", "UserPost")
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserPost", "UserPost")
                         .WithMany()
                         .HasForeignKey("UserPostId")
                         .OnDelete(DeleteBehavior.Restrict)

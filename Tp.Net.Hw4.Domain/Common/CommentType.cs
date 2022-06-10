@@ -1,7 +1,7 @@
-﻿using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
+﻿using TP.Net.Hw4.Domain.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Domain.Common
+namespace TP.Net.Hw4.Domain.Common
 {
     public class CommentType
     {
