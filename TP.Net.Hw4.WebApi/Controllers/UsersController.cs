@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Application.Dtos;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 {
+    [Authorize]
     [Route("/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -30,23 +32,22 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
                 return NotFound();
 
             var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
-            //var userDto = _mapper.Map<User, UserDto>(users);
 
             return Ok(userDto);            
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
-        {
-            if(!ModelState.IsValid)
-                return BadRequest(ModelState);
+        //[HttpPost]
+        //public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
+        //{
+        //    if(!ModelState.IsValid)
+        //        return BadRequest(ModelState);
 
-            var user = _mapper.Map<UserDto, User>(userDto);
-            _userRepository.Add(user);
+        //    var user = _mapper.Map<UserDto, User>(userDto);
+        //    _userRepository.Add(user);
 
-            await _unitOfWork.CompleteAsync();
-            return Created("/users",user);
-        }
+        //    await _unitOfWork.CompleteAsync();
+        //    return Created("/users",user);
+        //}
     }
 }

@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using TP.Net.Hw4.Infrastructure.Context;
-using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using TP.Net.Hw4.Application.Interfaces.Context;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.Domain.Entity;
+using TP.Net.Hw4.Infrastructure.Context;
+using TP.Net.Hw4.Infrastructure.Services;
 using TP.Net.Hw4.Infrastructure.Repositories;
-using System.Reflection;
 using TP.Net.Hw4.Infrastructure.MappingProfile;
+using Microsoft.IdentityModel.Tokens;
 
 namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 {
@@ -29,6 +31,15 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 
             //Mapping
             services.AddAutoMapper(typeof(Mapping));
+            
+            
+            //Token Configs
+            services.AddScoped<TokenGenerator>();
+
+            services.AddIdentity<User,UserRole>()
+                    .AddEntityFrameworkStores<SocialNetworkDbContext>()
+                    .AddDefaultTokenProviders();
+
 
             //TokenValidationParameter Object
             TokenValidationParameters tokenValidationParameters = new()
@@ -45,12 +56,14 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 
             //JWT Bearer configurations
             services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(opt => opt.TokenValidationParameters = tokenValidationParameters);
+                        {
+                            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                        })
+                    .AddJwtBearer(opt => opt.TokenValidationParameters = tokenValidationParameters);
+
+
 
 
             return services;
