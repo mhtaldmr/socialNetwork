@@ -68,27 +68,29 @@ namespace TP.Net.Hw4.WebApi.Controllers
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserSignupDto login)
+        public async Task<IActionResult> Login([FromBody] UserLoginDto login)
         {
-            if (ModelState.IsValid)
-            {
-                var existingUser = await _userManager.FindByEmailAsync(login.Email);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-                if (existingUser == null)
-                    return BadRequest("usernull");
-                if (await _userManager.IsLockedOutAsync(existingUser))
-                    return BadRequest("userislocked");
+            var existingUser = await _userManager.FindByEmailAsync(login.Email);
+
+            if (existingUser == null)
+                return BadRequest("usernull");
+            if (await _userManager.IsLockedOutAsync(existingUser))
+                return BadRequest("userislocked");
                 
 
-                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, login.Password);
-                var singInResult = await _signInManager.CheckPasswordSignInAsync(existingUser, login.Password, false);
+            var isCorrect = await _userManager.CheckPasswordAsync(existingUser, login.Password);
+            var singInResult = await _signInManager.CheckPasswordSignInAsync(existingUser, login.Password, false);
 
-                if (!isCorrect)
-                {
-                    await _userManager.AccessFailedAsync(existingUser);
-                    return BadRequest("accesfailed");
-                }
-
+            if (!isCorrect)
+            {
+                await _userManager.AccessFailedAsync(existingUser);
+                return BadRequest("accesfailed");
+            }
+            else
+            {
                 var claims = new List<Claim>
                 {
                     new Claim("Email", existingUser.Email),
@@ -99,10 +101,9 @@ namespace TP.Net.Hw4.WebApi.Controllers
 
                 var jwtToken = _tokenGenerator.GetToken(claims);
 
-                return Ok(jwtToken);
+                return Ok(new { token = jwtToken });
             }
 
-            return BadRequest("end");
         }
     }
 }
