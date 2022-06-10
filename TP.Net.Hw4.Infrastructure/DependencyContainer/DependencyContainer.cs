@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
 using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
 using System.Text;
+using TP.Net.Hw4.Application.Interfaces.Context;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.Infrastructure.Repositories;
 
 namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
 {
@@ -20,6 +22,8 @@ namespace MuhammetAliDemir.TP.Net.Hw4.Infrastructure.DependencyContainer
 
             //Interface signing.
             services.AddScoped<ISocialNetworkDbContext, SocialNetworkDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
 
             //TokenValidationParameter Object

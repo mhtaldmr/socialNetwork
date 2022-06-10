@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces;
+using TP.Net.Hw4.Application.Interfaces.Context;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
 
 namespace MuhammetAliDemir.TP.Net.Hw4.WebAPI.Controllers
 {
@@ -8,18 +9,20 @@ namespace MuhammetAliDemir.TP.Net.Hw4.WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ISocialNetworkDbContext _socialNetworkDbContext;
+        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(ISocialNetworkDbContext socialNetworkDbContext)
+        public UsersController(IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
-            _socialNetworkDbContext = socialNetworkDbContext;
+            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
 
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
-            var users = _socialNetworkDbContext.Users;
+            var users = await _userRepository.GetUserAll();
 
             if(users is null)
                 return NotFound();

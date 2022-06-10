@@ -2,7 +2,7 @@
 using MuhammetAliDemir.TP.Net.Hw4.Domain.Common;
 using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
 
-namespace MuhammetAliDemir.TP.Net.Hw4.Application.Interfaces
+namespace TP.Net.Hw4.Application.Interfaces.Context
 {
     public interface ISocialNetworkDbContext
     {

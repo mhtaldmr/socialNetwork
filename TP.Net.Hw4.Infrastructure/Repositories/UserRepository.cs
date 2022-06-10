@@ -1,0 +1,51 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MuhammetAliDemir.TP.Net.Hw4.Domain.Entity;
+using MuhammetAliDemir.TP.Net.Hw4.Infrastructure.Context;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
+
+namespace TP.Net.Hw4.Infrastructure.Repositories
+{
+    public class UserRepository : IUserRepository
+    {
+        private readonly SocialNetworkDbContext _context;
+
+        public UserRepository(SocialNetworkDbContext context)
+        {
+            _context = context;
+        }
+
+
+
+        public async Task<User> GetUser(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (user is null)
+                throw new ArgumentNullException("Userid does not exist!");
+
+            return user;
+        }
+
+        public async Task<IEnumerable<User>> GetUserAll()
+        {
+            var users = await _context.Users.ToListAsync();
+
+            return users;
+        }
+
+        public void Add(User user)
+        {
+            _context.Users.Add(user);
+        }
+
+        public void Delete(User user)
+        {
+            _context.Users.Remove(user);
+        }
+
+    }
+}
