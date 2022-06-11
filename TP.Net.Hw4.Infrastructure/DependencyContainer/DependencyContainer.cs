@@ -11,6 +11,7 @@ using TP.Net.Hw4.Infrastructure.Services;
 using TP.Net.Hw4.Infrastructure.Repositories;
 using TP.Net.Hw4.Infrastructure.MappingProfile;
 using Microsoft.IdentityModel.Tokens;
+using TP.Net.Hw4.Application.Interfaces.Services;
 
 namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 {
@@ -32,8 +33,9 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
             
             
             //Token Configs
-            services.AddScoped<TokenGenerator>();
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
 
+            //Identity Package
             services.AddIdentity<User,UserRole>()
                     .AddEntityFrameworkStores<SocialNetworkDbContext>()
                     .AddDefaultTokenProviders();
@@ -69,7 +71,7 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
             services.AddStackExchangeRedisCache(options =>
             {
                 options.InstanceName = "RedisCacheServer";
-                options.Configuration = "localhost";
+                options.Configuration = "localhost:7182";
             });
 
 

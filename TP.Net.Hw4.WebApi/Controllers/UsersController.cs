@@ -6,6 +6,10 @@ using TP.Net.Hw4.Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using TP.Net.Hw4.Infrastructure.Caching;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text;
+using System.Text.Json;
+using TP.Net.Hw4.Application.Interfaces.Services;
 
 namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 {
@@ -14,18 +18,22 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private const string _cacheKeyInMemory = "UserListInMemory";
+        private const string _cacheKeyDistributed = "UserListDistributed";
+
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IMemoryCache _memoryCache;
-        private const string userListCacheKey = "UserList";
+        private readonly IDistributedCache _distributedCache;
 
-        public UsersController(IUserRepository userRepository, IUnitOfWork unitOfWork,IMapper mapper,IMemoryCache memoryCache)
+        public UsersController(IUserRepository userRepository,IUnitOfWork unitOfWork,IMapper mapper,IMemoryCache memoryCache,IDistributedCache distributedCache)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _memoryCache = memoryCache;
+            _distributedCache = distributedCache;
         }
 
 
@@ -47,9 +55,9 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
         public async Task<IActionResult> GetAllUsersByInMemory()
         {
             //check the cache if it has data return cache!..
-            if (_memoryCache.TryGetValue(userListCacheKey, out IEnumerable<UserDto> userDto))
+            if (_memoryCache.TryGetValue(_cacheKeyInMemory, out IEnumerable<UserDto> userCache))
             {
-                return Ok(userDto);
+                return Ok(userCache);
             }
             else
             {
@@ -57,14 +65,14 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
                 if (users is null)
                     return NotFound();
 
-                userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+                var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-                var cacheOptions = InMemoryEntryOptions.InMemoryEntryOptionParams();
-
-                _memoryCache.Set(userListCacheKey, userDto, cacheOptions);
+                //Start the caching!
+                var cacheOptions = InMemoryCacheEntryOptions.InMemoryCacheEntryOptionParams();
+                _memoryCache.Set(_cacheKeyInMemory, userDto, cacheOptions);
+                
+                return Ok(userDto);
             }
-
-            return Ok(userDto);
         }
 
 
@@ -72,13 +80,31 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllUsersByDistributed()
         {
-            var users = await _userRepository.GetUserAll();
-            if (users is null)
-                return NotFound();
 
-            var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+            var usersKey = _distributedCache.Get(_cacheKeyDistributed);
+            if(usersKey is not null)
+            {
+                var serializedUserList = Encoding.UTF8.GetString(usersKey);
+                var userDtoResult = JsonSerializer.Deserialize<UserDto>(serializedUserList);
+                return Ok(userDtoResult);
+            }
+            else
+            {
+                var users = await _userRepository.GetUserAll();
+                if (users is null)
+                    return NotFound();
 
-            return Ok(userDto);
+                var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+
+                var jsonArr = JsonSerializer.Serialize(userDto);
+
+                var cacheOptions = DistributedCachingEntryOptions.DistributedCachingEntryOptionsParams();
+
+                _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(jsonArr), cacheOptions);
+
+
+                return Ok(userDto);
+            }
         }
 
 

@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TP.Net.Hw4.Infrastructure.Caching
 {
-    public class InMemoryEntryOptions
+    public class InMemoryCacheEntryOptions
     {
-        public static MemoryCacheEntryOptions InMemoryEntryOptionParams()
+        public static MemoryCacheEntryOptions InMemoryCacheEntryOptionParams()
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                    .SetSlidingExpiration(TimeSpan.FromSeconds(60))

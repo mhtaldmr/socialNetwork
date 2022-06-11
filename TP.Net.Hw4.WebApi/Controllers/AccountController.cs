@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using TP.Net.Hw4.Application.Dtos;
+using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Infrastructure.Services;
 
 namespace TP.Net.Hw4.WebApi.Controllers
 {
@@ -13,17 +12,15 @@ namespace TP.Net.Hw4.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly TokenGenerator _tokenGenerator;
+        private readonly ITokenGenerator _tokenGenerator;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _configuration;
 
-        public AccountController(TokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,IConfiguration configuration)
+        public AccountController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager)
         {
             _tokenGenerator = tokenGenerator;
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
         }
 
 
@@ -47,6 +44,7 @@ namespace TP.Net.Hw4.WebApi.Controllers
                 RegisteredAt = DateTime.Now,
                 IsActive = true
             };
+
 
             var IsCreated = await _userManager.CreateAsync(newUser, signup.Password);
 

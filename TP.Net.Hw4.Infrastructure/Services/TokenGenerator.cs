@@ -7,11 +7,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Application.Responses;
 
 namespace TP.Net.Hw4.Infrastructure.Services
 {
-    public class TokenGenerator
+    public class TokenGenerator : ITokenGenerator
     {
         private readonly IConfiguration _configuration;
 
