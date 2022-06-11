@@ -5,11 +5,10 @@ using TP.Net.Hw4.Application.Dtos;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
-using TP.Net.Hw4.Infrastructure.Caching;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Text;
 using System.Text.Json;
-using TP.Net.Hw4.Application.Interfaces.Services;
+using TP.Net.Hw4.Infrastructure.Caching;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 {
@@ -81,11 +80,11 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
         public async Task<IActionResult> GetAllUsersByDistributed()
         {
 
-            var usersKey = _distributedCache.Get(_cacheKeyDistributed);
-            if(usersKey is not null)
+            var userCache= _distributedCache.Get(_cacheKeyDistributed);
+            if (userCache != null)
             {
-                var serializedUserList = Encoding.UTF8.GetString(usersKey);
-                var userDtoResult = JsonSerializer.Deserialize<UserDto>(serializedUserList);
+                var serializedUserList = Encoding.UTF8.GetString(userCache);
+                var userDtoResult = JsonSerializer.Deserialize<IEnumerable<UserDto>>(serializedUserList);
                 return Ok(userDtoResult);
             }
             else
@@ -97,14 +96,12 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
                 var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
                 var jsonArr = JsonSerializer.Serialize(userDto);
-
                 var cacheOptions = DistributedCachingEntryOptions.DistributedCachingEntryOptionsParams();
-
                 _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(jsonArr), cacheOptions);
-
 
                 return Ok(userDto);
             }
+            
         }
 
 

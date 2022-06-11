@@ -1,26 +1,26 @@
-﻿using System.Text;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Infrastructure.Context;
-using TP.Net.Hw4.Infrastructure.Services;
-using TP.Net.Hw4.Infrastructure.Repositories;
 using TP.Net.Hw4.Infrastructure.MappingProfile;
-using Microsoft.IdentityModel.Tokens;
-using TP.Net.Hw4.Application.Interfaces.Services;
+using TP.Net.Hw4.Infrastructure.Repositories;
+using TP.Net.Hw4.Infrastructure.Services;
 
 namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 {
     public static class DependencyContainer
     {
-        public static IServiceCollection AddInfractructureServices(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddInfractructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             //DBContext
-            var connectionString = configuration.GetConnectionString("default");
+            var connectionString = configuration.GetConnectionString("Default");
             services.AddDbContext<SocialNetworkDbContext>(options => options.UseSqlServer(connectionString));
 
 
@@ -30,13 +30,13 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
 
             //Mapping
             services.AddAutoMapper(typeof(Mapping));
-            
-            
+
+
             //Token Configs
             services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             //Identity Package
-            services.AddIdentity<User,UserRole>()
+            services.AddIdentity<User, UserRole>()
                     .AddEntityFrameworkStores<SocialNetworkDbContext>()
                     .AddDefaultTokenProviders();
 
@@ -68,10 +68,10 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
             services.AddMemoryCache();
 
             //DistributedCaching //Redis
-            services.AddStackExchangeRedisCache(options =>
+            services.AddStackExchangeRedisCache(opt =>
             {
-                options.InstanceName = "RedisCacheServer";
-                options.Configuration = "localhost:7182";
+                opt.Configuration = "localhost:6379";
+                opt.InstanceName = "RedisCacheServer";
             });
 
 
