@@ -9,5 +9,7 @@ namespace TP.Net.Hw4.Domain.Entity
         public string LastName { get; set; }
         public DateTime RegisteredAt { get; set; }
         public bool IsActive { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpireDate { get; set; } 
     }
 }
