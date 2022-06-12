@@ -1,6 +1,5 @@
 ﻿
-
-namespace TP.Net.Hw4.Application.Dtos
+namespace TP.Net.Hw4.Application.Dtos.Requests
 {
     public class UserSignupDto
     {

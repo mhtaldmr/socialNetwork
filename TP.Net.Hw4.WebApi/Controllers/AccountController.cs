@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using TP.Net.Hw4.Application.Dtos;
 using TP.Net.Hw4.Application.Interfaces.Services;
+using TP.Net.Hw4.Application.Dtos.Requests;
 using TP.Net.Hw4.Domain.Entity;
 
 namespace TP.Net.Hw4.WebApi.Controllers

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using TP.Net.Hw4.Application.Dtos;
+using TP.Net.Hw4.Application.Dtos.Requests;
 using TP.Net.Hw4.Domain.Entity;
 
-namespace TP.Net.Hw4.Infrastructure.MappingProfile
+namespace TP.Net.Hw4.Infrastructure.Common.MappingProfile
 {
     public class Mapping : Profile
     {

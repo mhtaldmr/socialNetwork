@@ -1,10 +1,5 @@
-﻿using TP.Net.Hw4.Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TP.Net.Hw4.Application.Interfaces.Repositories;
+﻿using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.Infrastructure.Persistence.Context;
 
 namespace TP.Net.Hw4.Infrastructure.Repositories
 {

@@ -8,8 +8,8 @@ using System.Text;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Infrastructure.Context;
-using TP.Net.Hw4.Infrastructure.MappingProfile;
+using TP.Net.Hw4.Infrastructure.Common.MappingProfile;
+using TP.Net.Hw4.Infrastructure.Persistence.Context;
 using TP.Net.Hw4.Infrastructure.Repositories;
 using TP.Net.Hw4.Infrastructure.Services;
 

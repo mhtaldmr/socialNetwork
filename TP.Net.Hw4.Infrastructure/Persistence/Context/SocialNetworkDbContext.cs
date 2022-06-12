@@ -4,7 +4,7 @@ using TP.Net.Hw4.Domain.Common;
 using TP.Net.Hw4.Domain.Entity;
 
 
-namespace TP.Net.Hw4.Infrastructure.Context
+namespace TP.Net.Hw4.Infrastructure.Persistence.Context
 {
     public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>
     {

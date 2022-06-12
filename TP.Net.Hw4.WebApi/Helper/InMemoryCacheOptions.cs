@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace TP.Net.Hw4.Infrastructure.Caching
+namespace TP.Net.Hw4.WebApi.Helper
 {
-    public class InMemoryCacheEntryOptions
+    public class InMemoryCacheOptions
     {
-        public static MemoryCacheEntryOptions InMemoryCacheEntryOptionParams()
+        public static MemoryCacheEntryOptions CacheOptions()
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                    .SetSlidingExpiration(TimeSpan.FromSeconds(60))

@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Application.Dtos;
-using TP.Net.Hw4.Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using System.Text;
 using System.Text.Json;
-using TP.Net.Hw4.Infrastructure.Caching;
 using Microsoft.Extensions.Caching.Distributed;
+using TP.Net.Hw4.Application.Dtos.Requests;
+using TP.Net.Hw4.WebApi.Helper;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
 
-namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
+namespace TP.Net.Hw4.WebApi.Controllers
 {
     [Authorize]
     [Route("/users")]
@@ -66,10 +66,10 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 
                 var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-                //Start the caching!
-                var cacheOptions = InMemoryCacheEntryOptions.InMemoryCacheEntryOptionParams();
+                //Start Caching Set
+                var cacheOptions = InMemoryCacheOptions.CacheOptions();
                 _memoryCache.Set(_cacheKeyInMemory, userDto, cacheOptions);
-                
+
                 return Ok(userDto);
             }
         }
@@ -83,9 +83,9 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
             var userCache= _distributedCache.Get(_cacheKeyDistributed);
             if (userCache != null)
             {
-                var serializedUserList = Encoding.UTF8.GetString(userCache);
-                var userDtoResult = JsonSerializer.Deserialize<IEnumerable<UserDto>>(serializedUserList);
-                return Ok(userDtoResult);
+                var serializedUserDtoToRead = Encoding.UTF8.GetString(userCache);
+                var deserializedUserDto = JsonSerializer.Deserialize<IEnumerable<UserDto>>(serializedUserDtoToRead);
+                return Ok(deserializedUserDto);
             }
             else
             {
@@ -95,29 +95,14 @@ namespace TP.Net.Hw4.WebApi.WebAPI.Controllers
 
                 var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-                var jsonArr = JsonSerializer.Serialize(userDto);
-                var cacheOptions = DistributedCachingEntryOptions.DistributedCachingEntryOptionsParams();
-                _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(jsonArr), cacheOptions);
+                //Start Caching Set
+                var seralizedUserDtoToSet = JsonSerializer.Serialize(userDto);
+                var cacheOptions = DistributedCacheOptions.CacheOptions();
+                _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(seralizedUserDtoToSet), cacheOptions);
 
                 return Ok(userDto);
             }
-            
+        
         }
-
-
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
-        //{
-        //    if(!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-
-        //    var user = _mapper.Map<UserDto, User>(userDto);
-        //    _userRepository.Add(user);
-
-        //    await _unitOfWork.CompleteAsync();
-        //    return Created("/users",user);
-        //}
     }
 }

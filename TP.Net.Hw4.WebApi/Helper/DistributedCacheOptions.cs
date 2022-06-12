@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 
-namespace TP.Net.Hw4.Infrastructure.Caching
+namespace TP.Net.Hw4.WebApi.Helper
 {
-    public class DistributedCachingEntryOptions
+    public class DistributedCacheOptions
     {
-        public static DistributedCacheEntryOptions DistributedCachingEntryOptionsParams()
+        public static DistributedCacheEntryOptions CacheOptions()
         {
             var cacheEntryOptions = new DistributedCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromSeconds(60))

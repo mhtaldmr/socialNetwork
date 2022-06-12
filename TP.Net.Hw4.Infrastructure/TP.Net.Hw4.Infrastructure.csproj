@@ -25,4 +25,8 @@
     <ProjectReference Include="..\TP.Net.Hw4.Application\TP.Net.Hw4.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Migrations\" />
+  </ItemGroup>
+
 </Project>
