@@ -45,7 +45,6 @@ namespace TP.Net.Hw4.WebApi.Controllers
                 IsActive = true
             };
 
-
             var IsCreated = await _userManager.CreateAsync(newUser, signup.Password);
 
             if(IsCreated.Succeeded)
@@ -60,11 +59,8 @@ namespace TP.Net.Hw4.WebApi.Controllers
 
                 return Ok(new {token = jwtToken});
             }
-            else
-            {
-                return BadRequest(IsCreated.Errors);
-            }
 
+            return BadRequest(IsCreated.Errors);
         }
 
 
@@ -77,9 +73,9 @@ namespace TP.Net.Hw4.WebApi.Controllers
             var existingUser = await _userManager.FindByEmailAsync(login.Email);
 
             if (existingUser == null)
-                return BadRequest("usernull");
+                return BadRequest("User does not exist!");
             if (await _userManager.IsLockedOutAsync(existingUser))
-                return BadRequest("userislocked");
+                return BadRequest("User is Locked");
                 
 
             var isCorrect = await _userManager.CheckPasswordAsync(existingUser, login.Password);
@@ -88,22 +84,20 @@ namespace TP.Net.Hw4.WebApi.Controllers
             if (!isCorrect)
             {
                 await _userManager.AccessFailedAsync(existingUser);
-                return BadRequest("accesfailed");
+                return BadRequest("Access Failed");
             }
-            else
+
+            var claims = new List<Claim>
             {
-                var claims = new List<Claim>
-                {
-                    new Claim("Email", existingUser.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
+                new Claim("Email", existingUser.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
 
-                await _signInManager.SignInAsync(existingUser, false);
+            await _signInManager.SignInAsync(existingUser, false);
 
-                var jwtToken = _tokenGenerator.GetToken(claims);
+            var jwtToken = _tokenGenerator.GetToken(claims);
 
-                return Ok(new { token = jwtToken });
-            }
+            return Ok(new { token = jwtToken });
 
         }
     }
