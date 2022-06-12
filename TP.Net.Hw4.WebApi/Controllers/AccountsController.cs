@@ -9,16 +9,16 @@ using TP.Net.Hw4.Infrastructure.Persistence.Context;
 
 namespace TP.Net.Hw4.WebApi.Controllers
 {
-    [Route("/account")]
+    [Route("/accounts")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountsController : ControllerBase
     {
         private readonly ITokenGenerator _tokenGenerator;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly SocialNetworkDbContext _context;
 
-        public AccountController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,SocialNetworkDbContext context)
+        public AccountsController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,SocialNetworkDbContext context)
         {
             _tokenGenerator = tokenGenerator;
             _userManager = userManager;
