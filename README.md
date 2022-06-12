@@ -1,47 +1,90 @@
-# Social Network DB Created.
 
-This project is an example of using MSSQL and SQL Queries.
+# TP. Net Week 4
+
+This project is an example of using JWT Security Tokens, EF.Identity Package and Memory Caching Packages.
+To be able to make the project Clean Architecture Design has been used.
 
 ### What I have used so far:
 - Asp.Net Core Web API with `.Net6.0` framework.
-- EntityFramwork6 as an ORM and Tools packages.
+- EntityFramworkCore as an ORM and Tools packages.
 - MSSQL Server as an Database and SQLServer packages.
-- Using DBeaver to display the tables.
+- JWT token, Identity packages used for Authentication.
+- InMemoryCache and StackExchanceRedis Caching packages.
+- AutoMapper for mapping dtos.
+- Postman and Swagger used for tests.
 
 ## Requirements
-- Creating a SocialNetworkDB.
-- Messages can be text, image or video.
-- Users can add friends.
-- Messages can be public or private.
-- When user update a message, generate an entry to UserMessageArchive table.
-- When user make a request, it will send to FriendShipApproval table.
-- Writing a query to return max message senders.
+- Creating a SocialNetworkDB by CodeFirst approach.
+- Use EF6 and Identity package.
+- Create and Authentication system based on JWT.
+- Create caching mechanism with both InMemoryCache and DistributedCahce.
 
 ## Installation and Usage
 
 - To get the project :
 ```
-    git clone https://github.com/mhtaldmr/socialnetworkDb-.net.git
+    git clone https://github.com/186-Teleperformans-Net-Bootcamp/hafta4-mhtaldmr.git
 ```
-- To reach the project folder :
-```
-    cd socialnetworkDb-.net
-    cd MuhammetAliDemir.TP.Net.Hw3.Sql
-```
-- For Creating the DB and sending datas : 
-```
+- To create the database first, in the `TP.Net.Hw4.Infrastructure` folder :
+```c
     update-database
 ```
+- To start the project, in the `TP.Net.Hw4.WebApi` folder:
+```c
+    dotnet run
+```
+- The port will be listenin on : https://localhost:7182
 
-## Design
-- Database Tables and Connections
- <br>
-<img src="https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/src/SocialNetworkDB.png" alt="design" />
+## DB Design
 
-## Queries
-- Writing 3 query for requirements.
-	- For updating messages a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/TriggerMessageUpdate.sql) created for Inserting a Message Archive ***BEFORE*** action and then updated.
-	- For friend request a [TRIGGER](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/TriggerAfterFriedRequest.sql) created for Inserting a FriendshipApproval ***AFTER*** request action.
-	- For Max message senders a [PROCEDURE](https://github.com/mhtaldmr/socialnetworkDb-.net/blob/main/Queries/GetMaxNumberOfMessageSenders.sql) created.
+<img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta4-mhtaldmr/blob/main/images/social.png" alt="design" />
+
+## Endpoints
+
+<img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta4-mhtaldmr/blob/main/images/endpoints.png" alt="endpoints" />
+
+## Testing
+**1. JWT Example**
+
+- To test the project, first a user must be created. After signing up a token generated. 
+```c
+    {   "userName": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "password": "string"  }
+```
+- To be able to login, a user and password entered correctly. 
+```c
+    {   "email": "string",
+        "password": "string"  }
+```
+
+
+- With the token  in postman, by using `../users/authorization` endpoint, api can tested.
+- Without the right token, user will get Unautorized response.
+- To create a Refresh Token, a DTO used to have it inside the Access Token
+```c
+    public class TokenResponse
+    {
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime Expiration { get; set; }
+    }
+``` 
+- To test the Token in the Postman, in Authorization, token must be inserted in the Bearer Token section.
+- To test the refresh token, `../accounts/refreshToken` endpoint can be tested.
+
+**2. Memory Cache**
+- To test the Memory Cache, two endpoint is exist in the swagger. In postman the performane can be tested.
+- To be able to use Redis Cache Server, it needs to be installed.
+- For windows you can check this [guide!](https://redis.io/docs/getting-started/installation/install-redis-on-windows/)
+- Redis is using datas as bytes, thus JsonSerializer must be used.
+```c 
+    var seralizedUserDtoToSet = JsonSerializer.Serialize(userDto);
+    var cacheOptions = DistributedCacheOptions.CacheOptions();
+    _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(seralizedUserDtoToSet), cacheOptions);
+```
+
 
 ---
