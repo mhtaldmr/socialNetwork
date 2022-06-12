@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TP.Net.Hw4.Domain.Common;
 
 namespace TP.Net.Hw4.Domain.Entity
 {
-    public class UserPost
+    public class UserPost : BaseEntity
     {
-        public int Id { get; set; }
         public string Post { get; set; }
         public int PostType { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]

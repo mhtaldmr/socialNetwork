@@ -9,7 +9,7 @@ namespace TP.Net.Hw4.Domain.Common
         [Column(Order=0)]
         public int Id { get; set; }
 
-        [Column(Order=1)]
-        public string? Name { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

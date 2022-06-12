@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TP.Net.Hw4.Domain.Common;
 
 namespace TP.Net.Hw4.Domain.Entity
 {
-    public class FriendshipRequest
+    public class FriendshipRequest : BaseEntity
     {
-        public int Id { get; set; }
-        public DateTime RequestedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-
         public int SenderId { get; set; }
         [ForeignKey("SenderId")]
         public User Sender { get; set; }

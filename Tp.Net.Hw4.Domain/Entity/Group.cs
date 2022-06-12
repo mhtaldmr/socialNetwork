@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TP.Net.Hw4.Domain.Common;
 
 namespace TP.Net.Hw4.Domain.Entity
 {
-    public class Group
+    public class Group : BaseEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public int AdminId { get; set; }
         [ForeignKey("AdminId")]

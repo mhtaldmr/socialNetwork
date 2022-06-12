@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TP.Net.Hw4.Domain.Common;
 
 namespace TP.Net.Hw4.Domain.Entity
 {
-    public class Friendship
+    public class Friendship : BaseEntity
     {
-        public int Id { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public int SourceId { get; set; }
         [ForeignKey("SourceId")]

@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TP.Net.Hw4.Domain.Common;
 
 namespace TP.Net.Hw4.Domain.Entity
 {
-    public class UserMessage
+    public class UserMessage : BaseEntity
     {
-        public int Id { get; set; }
         public string MessageBody { get; set; }
         public int MessageTypeId { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public int SenderId { get; set; }
         [ForeignKey("SenderId")]
