@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP.Net.Hw4.Infrastructure.Persistence.Context;
 
@@ -11,9 +12,10 @@ using TP.Net.Hw4.Infrastructure.Persistence.Context;
 namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613064125_SeedMessageTypes")]
+    partial class SeedMessageTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,6 +143,8 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommentTypeId");
 
                     b.ToTable("CommentTypes");
                 });
@@ -358,13 +362,9 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("MessageBody")
                         .IsRequired()
@@ -517,13 +517,9 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("MessageBody")
                         .IsRequired()
@@ -557,13 +553,12 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PostBody")
+                    b.Property<string>("Post")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PostType")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -582,23 +577,16 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CommentBody")
+                    b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CommentTypeId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -607,8 +595,6 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentTypeId");
 
                     b.HasIndex("UserId");
 
@@ -696,6 +682,17 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TP.Net.Hw4.Domain.Common.CommentType", b =>
+                {
+                    b.HasOne("TP.Net.Hw4.Domain.Entity.UserPostComment", "UserPostComment")
+                        .WithMany()
+                        .HasForeignKey("CommentTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("UserPostComment");
                 });
 
             modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.Friendship", b =>
@@ -866,12 +863,6 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("TP.Net.Hw4.Domain.Entity.UserPostComment", b =>
                 {
-                    b.HasOne("TP.Net.Hw4.Domain.Common.CommentType", "CommentType")
-                        .WithMany()
-                        .HasForeignKey("CommentTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("TP.Net.Hw4.Domain.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -883,8 +874,6 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserPostId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("CommentType");
 
                     b.Navigation("User");
 

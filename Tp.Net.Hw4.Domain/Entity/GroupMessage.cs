@@ -6,7 +6,10 @@ namespace TP.Net.Hw4.Domain.Entity
     public class GroupMessage : BaseEntity
     {
         public string MessageBody { get; set; }
+
         public int MessageTypeId { get; set; }
+        [ForeignKey("MessageTypeId")]
+        public MessageType MessageType { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]

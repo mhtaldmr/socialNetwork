@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tp.Net.Hw4.Domain\Tp.Net.Hw4.Domain.csproj" />
+    <ProjectReference Include="..\Tp.Net.Hw4.Domain\TP.Net.Hw4.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP.Net.Hw4.Infrastructure.Persistence.Context;
 
@@ -11,9 +12,10 @@ using TP.Net.Hw4.Infrastructure.Persistence.Context;
 namespace TP.Net.Hw4.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613082410_SeedCommentTypes")]
+    partial class SeedCommentTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

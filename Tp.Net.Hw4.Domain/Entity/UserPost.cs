@@ -5,8 +5,8 @@ namespace TP.Net.Hw4.Domain.Entity
 {
     public class UserPost : BaseEntity
     {
-        public string Post { get; set; }
-        public int PostType { get; set; }
+        public string PostBody { get; set; }
+        public string PostTitle { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Net.Hw4.WebApi", "TP.Net.Hw4.WebApi\TP.Net.Hw4.WebApi.csproj", "{C7B59B10-79BE-4A3F-B532-FC4AFBF4F7E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP.Net.Hw4.Infrastructure", "TP.Net.Hw4.Infrastructure\TP.Net.Hw4.Infrastructure.csproj", "{0EFC67A3-F678-4B5E-9903-93FDA07FA2DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Net.Hw4.Infrastructure", "TP.Net.Hw4.Infrastructure\TP.Net.Hw4.Infrastructure.csproj", "{0EFC67A3-F678-4B5E-9903-93FDA07FA2DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP.Net.Hw4.Application", "TP.Net.Hw4.Application\TP.Net.Hw4.Application.csproj", "{C27E932C-BE9C-4F35-BD60-C00A8FF81BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Net.Hw4.Application", "TP.Net.Hw4.Application\TP.Net.Hw4.Application.csproj", "{C27E932C-BE9C-4F35-BD60-C00A8FF81BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tp.Net.Hw4.Domain", "Tp.Net.Hw4.Domain\Tp.Net.Hw4.Domain.csproj", "{873AA67C-7275-477A-8654-BB49BB8A8020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP.Net.Hw4.Domain", "Tp.Net.Hw4.Domain\TP.Net.Hw4.Domain.csproj", "{873AA67C-7275-477A-8654-BB49BB8A8020}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
