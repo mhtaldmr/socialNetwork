@@ -25,7 +25,7 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUserAll()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
             var users = await _context.Users.ToListAsync();
 

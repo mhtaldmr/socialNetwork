@@ -5,6 +5,6 @@ namespace TP.Net.Hw4.Application.Interfaces.Repositories
 {
     public interface IUserMessageRepository
     {
-        Task<IEnumerable<UserMessage>> GetUserMessage();
+        Task<IEnumerable<UserMessage>> GetAllUserMessages(UserMessageQuery filter);
     }
 }

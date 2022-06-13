@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TP.Net.Hw4.Infrastructure.Persistence.Context;
+using TP.Net.Hw4.Application.Dtos.Requests;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.Domain.Entity;
 
 namespace TP.Net.Hw4.WebApi.Controllers
 {
@@ -8,22 +10,25 @@ namespace TP.Net.Hw4.WebApi.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private readonly SocialNetworkDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly IUserMessageRepository _repository;
 
-        public MessagesController(SocialNetworkDbContext context)
+        public MessagesController(IMapper mapper, IUserMessageRepository repository)
         {
-            _context = context;
+            _mapper = mapper;
+            _repository = repository;
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> GetMessagesByFilter()
+        public async Task<IActionResult> GetUserMessages([FromQuery] UserMessageQueryDto filterDto)
         {
+            var filter = _mapper.Map<UserMessageQueryDto, UserMessageQuery>(filterDto);
+            var messages = await _repository.GetAllUserMessages(filter);
+            if (!messages.Any())
+                return NotFound("There is no message by given context!");
 
-
-
-
-            return Ok();
+            return Ok(messages);
         }
     }
 }

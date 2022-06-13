@@ -39,7 +39,7 @@ namespace TP.Net.Hw4.WebApi.Controllers
         [HttpGet("authorization")]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _userRepository.GetUserAll();
+            var users = await _userRepository.GetAllUsers();
             if(users is null)
                 return NotFound();
 
@@ -60,7 +60,7 @@ namespace TP.Net.Hw4.WebApi.Controllers
             }
             else
             {
-                var users = await _userRepository.GetUserAll();
+                var users = await _userRepository.GetAllUsers();
                 if (users is null)
                     return NotFound();
 
@@ -89,7 +89,7 @@ namespace TP.Net.Hw4.WebApi.Controllers
             }
             else
             {
-                var users = await _userRepository.GetUserAll();
+                var users = await _userRepository.GetAllUsers();
                 if (users is null)
                     return NotFound();
 
