@@ -26,7 +26,7 @@ namespace TP.Net.Hw4.Infrastructure.Common.Extensions
                 queryObj.Page = 1;
 
             if (queryObj.PageSize <= 0)
-                queryObj.PageSize = 5;
+                queryObj.PageSize = (byte)query.Count();
 
             return query.Skip((queryObj.Page - 1) * queryObj.PageSize).Take(queryObj.PageSize);
     

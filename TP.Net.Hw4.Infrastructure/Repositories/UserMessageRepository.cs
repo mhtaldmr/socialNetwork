@@ -11,8 +11,9 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
     public class UserMessageRepository : IUserMessageRepository
     {
         private readonly SocialNetworkDbContext _context;
+        private IQueryable<UserMessage> _query;
 
-        public UserMessageRepository(SocialNetworkDbContext context)  => (_context) = (context);
+        public UserMessageRepository(SocialNetworkDbContext context) => _context = context;
 
         //Taking All th messages and filtering them!
         public async Task<IEnumerable<UserMessage>> GetAllUserMessages(UserMessageQueryDto queryObj)
@@ -36,6 +37,9 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
             //Applying filters, orderings and paging
             query = query.ApplyOrdering(queryObj, messageColumns);
             query = query.ApplyFiltering(queryObj);
+
+            //setting the total items filtered! and this will send in the header By GgetMetaData method!
+            _query = query;
             query = query.ApplyPaging(queryObj);
 
             return await query.ToListAsync();
@@ -44,7 +48,7 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
         //Sending the total pages and everything else for Header Response.
         public object GetMetaData(UserMessageQueryDto queryObj)
         {
-            var totalItems = _context.UserMessages.Count();
+            var totalItems = _query.Count();
             int totalPage = (int)Math.Ceiling(totalItems / (double)queryObj.PageSize);
             bool hasPrevious = queryObj.Page > 1;
             bool hasNext = queryObj.Page < totalPage;
