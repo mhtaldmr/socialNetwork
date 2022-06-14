@@ -1,3 +1,4 @@
+using TP.Net.Hw4.Application.DependencyContainer;
 using TP.Net.Hw4.Infrastructure.DependencyContainer;
 
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 //Adding containers for layers.
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddInfractructureServices(builder.Configuration);
 
 

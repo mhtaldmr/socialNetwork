@@ -5,9 +5,9 @@ using TP.Net.Hw4.Domain.Entity;
 
 namespace TP.Net.Hw4.Application.Mapping
 {
-    public class Mapping : Profile
+    public class MappingProfile : Profile
     {
-        public Mapping()
+        public MappingProfile()
         {
             CreateMap<User, UserDto>()
                 .ForMember(x => x.Password, opt => opt.MapFrom(x => x.PasswordHash))

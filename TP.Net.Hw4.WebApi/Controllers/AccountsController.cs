@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Application.Dtos.Requests;
-using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Application.Interfaces.Context;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 
 namespace TP.Net.Hw4.WebApi.Controllers

@@ -31,7 +31,6 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
                 ["Id"] = m => m.Id,
                 ["messagebody"] = m => m.MessageBody,
                 ["createdAt"] = m => m.CreatedAt,
-                ["updatedAt"] = m => m.UpdatedAt,
             };
 
             //Applying filters, orderings and paging

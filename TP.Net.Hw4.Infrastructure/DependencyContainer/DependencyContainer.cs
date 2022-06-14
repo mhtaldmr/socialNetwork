@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
 using TP.Net.Hw4.Application.Interfaces.Services;
-using TP.Net.Hw4.Application.Mapping;
 using TP.Net.Hw4.Domain.Entity;
 using TP.Net.Hw4.Infrastructure.Persistence.Context;
 using TP.Net.Hw4.Infrastructure.Repositories;
@@ -29,9 +28,6 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserMessageRepository, UserMessageRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-
-            //Mapping
-            services.AddAutoMapper(typeof(Mapping));
 
 
             //Token Configs

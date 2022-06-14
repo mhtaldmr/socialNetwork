@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
-using System.Text.Json;
 using TP.Net.Hw4.Application.Dtos.Requests;
-using TP.Net.Hw4.Application.Dtos.Responses;
 using TP.Net.Hw4.Application.Interfaces.Models;
 using TP.Net.Hw4.Domain.Entity;
 
@@ -9,6 +7,7 @@ namespace TP.Net.Hw4.Infrastructure.Common.Extensions
 {
     public static class IQueryableExtensions
     {
+        //Extension for Fintering The User Messages
         public static IQueryable<UserMessage> ApplyFiltering(this IQueryable<UserMessage> query, UserMessageQueryDto queryObj)
         {
             if (!string.IsNullOrWhiteSpace(queryObj.MessageBody))
@@ -20,6 +19,7 @@ namespace TP.Net.Hw4.Infrastructure.Common.Extensions
             return query;
         }
 
+        //Extension for Paging as a GENERIC input Type
         public static IQueryable<T> ApplyPaging<T>(this IQueryable<T> query, IQueryObject queryObj)
         {
             if (queryObj.Page <= 0)
@@ -32,6 +32,7 @@ namespace TP.Net.Hw4.Infrastructure.Common.Extensions
     
         }
 
+        //Extension for Ordering as a GENERIC input Type
         public static IQueryable<T> ApplyOrdering<T>(this IQueryable<T> query, IQueryObject queryObj, Dictionary<string, Expression<Func<T, object>>> messageColumns)
         {
             if (string.IsNullOrWhiteSpace(queryObj.SortBy) || !messageColumns.ContainsKey(queryObj.SortBy))

@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using TP.Net.Hw4.Domain.Entity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Caching.Memory;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Caching.Distributed;
 using TP.Net.Hw4.Application.Dtos.Requests;
-using TP.Net.Hw4.WebApi.Helper;
 using TP.Net.Hw4.Application.Interfaces.Repositories;
+using TP.Net.Hw4.WebApi.Helper;
+using TP.Net.Hw4.Domain.Entity;
 
 namespace TP.Net.Hw4.WebApi.Controllers
 {
