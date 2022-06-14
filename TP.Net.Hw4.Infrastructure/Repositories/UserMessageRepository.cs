@@ -1,7 +1,10 @@
-﻿using TP.Net.Hw4.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using TP.Net.Hw4.Application.Dtos.Requests;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
 using TP.Net.Hw4.Domain.Entity;
+using TP.Net.Hw4.Infrastructure.Common.Extensions;
 using TP.Net.Hw4.Infrastructure.Persistence.Context;
-
 
 namespace TP.Net.Hw4.Infrastructure.Repositories
 {
@@ -9,39 +12,45 @@ namespace TP.Net.Hw4.Infrastructure.Repositories
     {
         private readonly SocialNetworkDbContext _context;
 
-        public UserMessageRepository(SocialNetworkDbContext context)
+        public UserMessageRepository(SocialNetworkDbContext context)  => (_context) = (context);
+
+        //Taking All th messages and filtering them!
+        public async Task<IEnumerable<UserMessage>> GetAllUserMessages(UserMessageQueryDto queryObj)
         {
-            _context = context;
+            //taking the datas from the database
+            var query = _context.UserMessages
+                .Include(u => u.Sender)
+                .Include(u => u.Receiver)
+                .Include(m => m.MessageType)
+                .AsQueryable();
+            
+            //creating a dictionary for sorting query for expresions
+            var messageColumns = new Dictionary<string, Expression<Func<UserMessage, object>>>()
+            {
+                ["Id"] = m => m.Id,
+                ["messagebody"] = m => m.MessageBody,
+                ["createdAt"] = m => m.CreatedAt,
+                ["updatedAt"] = m => m.UpdatedAt,
+            };
+
+            //Applying filters, orderings and paging
+            query = query.ApplyOrdering(queryObj, messageColumns);
+            query = query.ApplyFiltering(queryObj);
+            query = query.ApplyPaging(queryObj);
+
+            return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<UserMessage>> GetAllUserMessages(UserMessageQuery queryObj)
+        //Sending the total pages and everything else for Header Response.
+        public object GetMetaData(UserMessageQueryDto queryObj)
         {
-            var result = new List<UserMessage>();
+            var totalItems = _context.UserMessages.Count();
+            int totalPage = (int)Math.Ceiling(totalItems / (double)queryObj.PageSize);
+            bool hasPrevious = queryObj.Page > 1;
+            bool hasNext = queryObj.Page < totalPage;
 
-            var query = _context.UserMessages.AsQueryable();
-
+            return new { totalItems, queryObj.Page, queryObj.PageSize, totalPage, hasNext, hasPrevious };
             
-
-            if(!string.IsNullOrWhiteSpace(queryObj.MessageBody))
-                query = _context.UserMessages.Where(m => m.MessageBody.Contains(queryObj.MessageBody));
-
-            if (queryObj.CreatedAt.HasValue)
-                query = _context.UserMessages.Where(m => m.CreatedAt > queryObj.CreatedAt.Value);
-
-
-            if (queryObj.Page <= 0)
-                queryObj.Page = 1;
-
-            if (queryObj.PageSize <= 0)
-                queryObj.PageSize = 5;
-
-            query = query.Skip((queryObj.Page -1) * queryObj.PageSize).Take(queryObj.PageSize);
-
-
-
-            result = query.ToList();
-
-            return result;
         }
     }
 }
