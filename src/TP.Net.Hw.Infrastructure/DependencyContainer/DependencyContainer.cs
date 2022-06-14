@@ -28,6 +28,9 @@ namespace TP.Net.Hw.Infrastructure.DependencyContainer
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserMessageRepository, UserMessageRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IReportService, ReportService>();
+
 
 
             //Token Configs
