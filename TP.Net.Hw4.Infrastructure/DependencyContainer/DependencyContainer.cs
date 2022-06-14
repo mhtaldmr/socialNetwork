@@ -28,6 +28,7 @@ namespace TP.Net.Hw4.Infrastructure.DependencyContainer
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserMessageRepository, UserMessageRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
             //Mapping
             services.AddAutoMapper(typeof(Mapping));

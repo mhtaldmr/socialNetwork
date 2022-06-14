@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using TP.Net.Hw4.Application.Interfaces.Context;
+﻿using Microsoft.EntityFrameworkCore;
 using TP.Net.Hw4.Domain.Common;
 using TP.Net.Hw4.Domain.Entity;
 
-
-namespace TP.Net.Hw4.Infrastructure.Persistence.Context
+namespace TP.Net.Hw4.Application.Interfaces.Context
 {
-    public class SocialNetworkDbContext : IdentityDbContext<User, UserRole, int>, ISocialNetworkDbContext
+    public interface ISocialNetworkDbContext
     {
-        public SocialNetworkDbContext(DbContextOptions<SocialNetworkDbContext> options) : base(options)
-        {
-        }
-         
         public DbSet<User> Users { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<UserMessageArchive> UserMessagesArchive { get; set; }
@@ -27,19 +20,5 @@ namespace TP.Net.Hw4.Infrastructure.Persistence.Context
         public DbSet<GroupMessageArchive> GroupMessagesArchive { get; set; }
         public DbSet<CommentType> CommentTypes { get; set; }
         public DbSet<MessageType> MessageTypes { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
-            
-
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-
-        }
-
     }
 }

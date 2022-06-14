@@ -5,7 +5,8 @@ using System.Security.Claims;
 using TP.Net.Hw4.Application.Interfaces.Services;
 using TP.Net.Hw4.Application.Dtos.Requests;
 using TP.Net.Hw4.Domain.Entity;
-using TP.Net.Hw4.Infrastructure.Persistence.Context;
+using TP.Net.Hw4.Application.Interfaces.Context;
+using TP.Net.Hw4.Application.Interfaces.Repositories;
 
 namespace TP.Net.Hw4.WebApi.Controllers
 {
@@ -14,16 +15,16 @@ namespace TP.Net.Hw4.WebApi.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ITokenGenerator _tokenGenerator;
+        private readonly IAccountRepository _repository;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly SocialNetworkDbContext _context;
 
-        public AccountsController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,SocialNetworkDbContext context)
+        public AccountsController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,IAccountRepository repository)
         {
             _tokenGenerator = tokenGenerator;
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
+            _repository = repository;
         }
 
 
@@ -111,12 +112,12 @@ namespace TP.Net.Hw4.WebApi.Controllers
         }
 
         [HttpGet("refreshtoken")]
-        public async Task<IActionResult> GetRefreshTokeh([FromQuery] string refreshToken)
+        public async Task<IActionResult> GetRefreshToken([FromQuery] string refreshToken)
         {
-            var user = _context.Users.FirstOrDefault(u => u.RefreshToken == refreshToken && u.RefreshTokenExpireDate > DateTime.Now);
+            var user = await _repository.GetRefreshToken(refreshToken);
 
             if (user == null)
-                return BadRequest("Users Refresh Token Expired!");
+                return BadRequest("Users Refresh Token Expired or Doesnt Exist!");
 
             var claims = new List<Claim>
             {
