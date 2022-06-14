@@ -1,0 +1,15 @@
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TP.Net.Hw.Domain.Entity
+{
+    public class User : IdentityUser<int>
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime RegisteredAt { get; set; }
+        public bool IsActive { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpireDate { get; set; } 
+    }
+}
