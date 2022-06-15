@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TP.Net.Hw.Domain.Entity
+﻿namespace TP.Net.Hw.Domain.Entity
 {
     public class UserMessageQuery
     {

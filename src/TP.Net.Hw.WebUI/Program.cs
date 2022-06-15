@@ -1,6 +1,6 @@
 using Hangfire;
 using TP.Net.Hw.Application.DependencyContainer;
-using TP.Net.Hw.Application.Interfaces.Services;
+using TP.Net.Hw.Infrastructure.Common.Extensions;
 using TP.Net.Hw.Infrastructure.DependencyContainer;
 
 
@@ -32,15 +32,15 @@ if (app.Environment.IsDevelopment())
 
 //Using for authentication!
 app.UseAuthentication();
+//Hangfire DashBoard
+app.UseHangfireDashboard();
+//Generating custom extension for Recuirring jobs.
+app.UseHangfireJobs();
+
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-//Hangfire DashBoard
-app.UseHangfireDashboard();
-RecurringJob.AddOrUpdate<IReportService>("export-daily-excel", s => s.GetUsersExcelReport(), "34 7 * * 1-5");
-RecurringJob.AddOrUpdate<IEmailService>("send-daily-mail", s => s.SendEmailReport(), "35 7 * * 1-5");
 
 app.MapControllers();
 
