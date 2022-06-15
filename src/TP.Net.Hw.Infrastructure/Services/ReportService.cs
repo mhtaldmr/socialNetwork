@@ -60,7 +60,7 @@ namespace TP.Net.Hw.Infrastructure.Services
 
             //Giving the file a name.
             worksheet.Columns("A", "Z").AdjustToContents();
-            var fileSaveDate = DateTime.Now.ToString("yyyyMMddHHss");
+            var fileSaveDate = DateTime.Now.ToString("yyyyMMddHHmmss");
             string fileName = string.Format($"Users_{fileSaveDate}.xlsx");
             string path = $@"C:\TPReports\{ fileName}";
 
