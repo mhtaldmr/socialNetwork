@@ -6,6 +6,7 @@ namespace TP.Net.Hw.Application.Interfaces.Repositories
     {
         Task<User> GetUser(int id);  
         Task<IEnumerable<User>> GetAllUsers();  
+        IEnumerable<User> GetAllUsersForReport();  
         void Add(User user); 
         void Delete(User user);
     }

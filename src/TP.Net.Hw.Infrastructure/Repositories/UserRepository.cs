@@ -32,6 +32,13 @@ namespace TP.Net.Hw.Infrastructure.Repositories
             return users;
         }
 
+        public IEnumerable<User> GetAllUsersForReport()
+        {
+            var users = _context.Users.ToList();
+
+            return users;
+        }
+
         public void Add(User user)
         {
             _context.Users.Add(user);
