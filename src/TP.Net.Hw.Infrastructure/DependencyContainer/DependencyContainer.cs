@@ -9,10 +9,12 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TP.Net.Hw.Application.Interfaces.Repositories;
 using TP.Net.Hw.Application.Interfaces.Services;
+using TP.Net.Hw.Application.Interfaces.Services.RabbitMq;
 using TP.Net.Hw.Domain.Entity;
 using TP.Net.Hw.Infrastructure.Persistence.Context;
 using TP.Net.Hw.Infrastructure.Repositories;
 using TP.Net.Hw.Infrastructure.Services;
+using TP.Net.Hw.Infrastructure.Services.RabbitMq;
 
 namespace TP.Net.Hw.Infrastructure.DependencyContainer
 {
@@ -33,6 +35,7 @@ namespace TP.Net.Hw.Infrastructure.DependencyContainer
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IPublisherService, PublisherService>();
+            services.AddScoped<IRabbitMqConnection, RabbitMqConnection>();
 
 
 

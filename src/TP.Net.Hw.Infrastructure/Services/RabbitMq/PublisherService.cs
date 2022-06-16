@@ -1,26 +1,21 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
-using TP.Net.Hw.Application.Interfaces.Services;
+using TP.Net.Hw.Application.Interfaces.Services.RabbitMq;
 using TP.Net.Hw.Domain.Entity;
 
-namespace TP.Net.Hw.Infrastructure.Services
+namespace TP.Net.Hw.Infrastructure.Services.RabbitMq
 {
     public class PublisherService : IPublisherService
     {
+        private readonly IRabbitMqConnection _rabbitMqConnection;
+
+        public PublisherService(IRabbitMqConnection rabbitMqConnection) => _rabbitMqConnection = rabbitMqConnection;
+
         public void Publish(User user, string queueName, string routingKey)
         {
-            var connectionFactory = new ConnectionFactory()
-            {
-                HostName = "localhost",
-                VirtualHost = "/",
-                Port = 5672,
-                UserName = "guest",
-                Password = "guest"
-            };
-
             //creating the RabbitMQ connection 
-            using var connection = connectionFactory.CreateConnection();
+            using var connection = _rabbitMqConnection.GetRabbitMqConnection();
             using var channel = connection.CreateModel();
 
             //Creating exchanges and queues

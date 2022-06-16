@@ -5,6 +5,7 @@ using System.Security.Claims;
 using TP.Net.Hw.Application.Dtos.Requests;
 using TP.Net.Hw.Application.Interfaces.Repositories;
 using TP.Net.Hw.Application.Interfaces.Services;
+using TP.Net.Hw.Application.Interfaces.Services.RabbitMq;
 using TP.Net.Hw.Domain.Entity;
 
 namespace TP.Net.Hw.WebUI.Controllers
