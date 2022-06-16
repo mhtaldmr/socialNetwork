@@ -9,14 +9,18 @@ namespace TP.Net.Hw.Infrastructure.Services
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _configuration;
-        private readonly string _path = new DirectoryInfo(@"C:\TPReports").GetFiles().OrderByDescending(d => d.CreationTime).FirstOrDefault().ToString();
+        private readonly IReportService _reportService;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(IConfiguration configuration, IReportService reportService)
         {
             _configuration = configuration;
+            _reportService = reportService;
         }
-        public void SendEmailReport()
+        public async Task SendEmailReport()
         {
+            //Calling the excel report export service!
+            await _reportService.GetUsersExcelReport();
+
             //Creating mail configurations
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_configuration["MailBox:From"]));
@@ -35,7 +39,10 @@ namespace TP.Net.Hw.Infrastructure.Services
 
             //Adding this template to builder body.
             builder.HtmlBody = mailText;
-            builder.Attachments.Add(_path);
+
+            //Adding excel file into attachment to builder body.
+            var path = new DirectoryInfo(@"C:\TPReports").GetFiles().OrderByDescending(d => d.CreationTime).FirstOrDefault().ToString();
+            builder.Attachments.Add(path);
             email.Body = builder.ToMessageBody();
 
             //Sending mail configurations
@@ -44,8 +51,9 @@ namespace TP.Net.Hw.Infrastructure.Services
                 host: _configuration["Smtp:Host"],
                 port: Convert.ToInt32(_configuration["Smtp:Port"]),
                 options: SecureSocketOptions.StartTls);
-       
             smtp.Authenticate(_configuration["Smtp:Email"], _configuration["Smtp:Password"]);
+
+            //Send the mail and disconnect from smtp server!..
             smtp.Send(email);
             smtp.Disconnect(true);
         }

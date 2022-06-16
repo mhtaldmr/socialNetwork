@@ -14,19 +14,17 @@ namespace TP.Net.Hw.Infrastructure.Services
         {
             _repository = repository;
         }
-        public void GetUsersExcelReport()
+        public async Task GetUsersExcelReport()
         {
-            var users = _repository.GetAllUsersForReport();
+            var users = await _repository.GetAllUsers();
 
+            //Creating a excel workbook and inside of it creating a sheet named Users.
             using var workbook = new XLWorkbook();
-            //Creating a excel sheet in the excel file.
             IXLWorksheet worksheet = workbook.Worksheets.Add("Users");
-            var userss = new User();
-
             
             //For creating headers of the columns.
             var column = 1;
-            foreach (PropertyInfo p in userss.GetType().GetProperties())
+            foreach (PropertyInfo p in new User().GetType().GetProperties())
             {
                 var sheet = worksheet.Cell(1, column);
                 sheet.Value = p.Name;

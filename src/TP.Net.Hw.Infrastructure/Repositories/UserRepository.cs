@@ -15,7 +15,6 @@ namespace TP.Net.Hw.Infrastructure.Repositories
         }
 
 
-
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
@@ -28,13 +27,6 @@ namespace TP.Net.Hw.Infrastructure.Repositories
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             var users = await _context.Users.ToListAsync();
-
-            return users;
-        }
-
-        public IEnumerable<User> GetAllUsersForReport()
-        {
-            var users = _context.Users.ToList();
 
             return users;
         }
