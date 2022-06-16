@@ -32,6 +32,7 @@ namespace TP.Net.Hw.Infrastructure.DependencyContainer
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IPublisherService, PublisherService>();
 
 
 

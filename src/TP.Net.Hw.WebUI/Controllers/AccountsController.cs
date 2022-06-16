@@ -1,11 +1,11 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using TP.Net.Hw.Domain.Entity;
-using TP.Net.Hw.Application.Interfaces.Services;
+using System.Security.Claims;
 using TP.Net.Hw.Application.Dtos.Requests;
 using TP.Net.Hw.Application.Interfaces.Repositories;
+using TP.Net.Hw.Application.Interfaces.Services;
+using TP.Net.Hw.Domain.Entity;
 
 namespace TP.Net.Hw.WebUI.Controllers
 {
@@ -15,15 +15,17 @@ namespace TP.Net.Hw.WebUI.Controllers
     {
         private readonly ITokenGenerator _tokenGenerator;
         private readonly IAccountRepository _repository;
+        private readonly IPublisherService _publisherService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountsController(ITokenGenerator tokenGenerator,UserManager<User> userManager,SignInManager<User> signInManager,IAccountRepository repository)
+        public AccountsController(ITokenGenerator tokenGenerator, UserManager<User> userManager, SignInManager<User> signInManager, IAccountRepository repository, IPublisherService publisherService)
         {
             _tokenGenerator = tokenGenerator;
             _userManager = userManager;
             _signInManager = signInManager;
             _repository = repository;
+            _publisherService = publisherService;
         }
 
 
@@ -50,7 +52,7 @@ namespace TP.Net.Hw.WebUI.Controllers
 
             var IsCreated = await _userManager.CreateAsync(newUser, signup.Password);
 
-            if(IsCreated.Succeeded)
+            if (IsCreated.Succeeded)
             {
                 var claims = new List<Claim>
                 {
@@ -63,7 +65,10 @@ namespace TP.Net.Hw.WebUI.Controllers
                 newUser.RefreshTokenExpireDate = jwtToken.Expiration.AddMinutes(5);
                 await _userManager.UpdateAsync(newUser);
 
-                return Ok(new {token = jwtToken});
+                //Publishing the user when a new user is created!.
+                _publisherService.Publish(newUser, "email", "email1");
+
+                return Ok(new { token = jwtToken });
             }
 
             return BadRequest(IsCreated.Errors);
@@ -82,7 +87,7 @@ namespace TP.Net.Hw.WebUI.Controllers
                 return BadRequest("User does not exist!");
             if (await _userManager.IsLockedOutAsync(existingUser))
                 return BadRequest("User is Locked");
-                
+
 
             var isCorrect = await _userManager.CheckPasswordAsync(existingUser, login.Password);
             var singInResult = await _signInManager.CheckPasswordSignInAsync(existingUser, login.Password, false);
