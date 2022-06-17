@@ -16,8 +16,8 @@ To be able to make the project Clean Architecture Design has been used.
 ## Requirements
 - Creating a filter system for an endpoint like Paging, Filtering and Searching.
 - Generate a message queue in one of the operations. (e.g. When creating a User)
-- Create an event to Consume that message queue.
-- Create a background service to get Current User List as Excel file and Email at 7.35am on weekdays only.
+- Create a service to Consume that message queue.
+- Create a background service to get Current User List as Excel file and send that in Email at 7.35am on weekdays only.
 
 ## Installation and Usage
 
@@ -29,7 +29,7 @@ To be able to make the project Clean Architecture Design has been used.
 ```c
     update-database
 ```
-- To start the project, in the `TP.Net.Hw.WebApi` and `TP.Net.Hw.Consumer` folders:
+- To start the project, in the `TP.Net.Hw.WebUI` and `TP.Net.Hw.Consumer` folders:
 ```c
     dotnet run
 ```
@@ -79,12 +79,16 @@ To be able to make the project Clean Architecture Design has been used.
 
 **4. Email and Excel Report Example**
 
-- The created excel report.
+- The created and sended Email.
  
  <img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta5-mhtaldmr/blob/main/images/emailreport.png" alt="emailreport" />
 
-- The sended email with excel attachment.
+- The generated excel files in the file explorer.
 
  <img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta5-mhtaldmr/blob/main/images/excelreport.png" alt="excelreport" />
+
+- The generated Excel file content.
+
+<img src="https://github.com/186-Teleperformans-Net-Bootcamp/hafta5-mhtaldmr/blob/main/images/excel.png" alt="excel" />
 
 ---
