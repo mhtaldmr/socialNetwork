@@ -67,7 +67,7 @@ namespace TP.Net.Hw.WebUI.Controllers
                 await _userManager.UpdateAsync(newUser);
 
                 //Publishing the user when a new user is created!.
-                _publisherService.Publish(newUser, "email", "email1");
+                _publisherService.Publish(newUser, "direct.email", "email1");
 
                 return Ok(new { token = jwtToken });
             }

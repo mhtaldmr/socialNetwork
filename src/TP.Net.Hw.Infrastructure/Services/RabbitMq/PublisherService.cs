@@ -14,7 +14,7 @@ namespace TP.Net.Hw.Infrastructure.Services.RabbitMq
 
         public void Publish(User user, string queueName, string routingKey)
         {
-            //creating the RabbitMQ connection 
+            //Creating the RabbitMQ connection with Using Because it must close connection when it send the message!
             using var connection = _rabbitMqConnection.GetRabbitMqConnection();
             using var channel = connection.CreateModel();
 
