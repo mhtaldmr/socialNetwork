@@ -29,7 +29,7 @@ To be able to make the project Clean Architecture Design has been used.
 ```c
     update-database
 ```
-- To start the project, in the `TP.Net.Hw.WebUI` and `TP.Net.Hw.Consumer` folders:
+- To start the project, **MULTIPLE STARTUP** must be selected with `TP.Net.Hw.WebUI` and `TP.Net.Hw.Consumer` or type in those folders:
 ```c
     dotnet run
 ```
