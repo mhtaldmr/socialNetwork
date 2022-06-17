@@ -35,74 +35,86 @@ namespace TP.Net.Hw.WebUI.Controllers
             _distributedCache = distributedCache;
         }
 
-
-        [HttpGet("authorization")]
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userRepository.GetAllUsers();
-            if(users is null)
+            if (users is null)
                 return NotFound();
 
             var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-            return Ok(userDto);            
+            return Ok(userDto);
         }
 
+        //[HttpGet("authorization")]
+        //public async Task<IActionResult> GetAllUsers()
+        //{
+        //    var users = await _userRepository.GetAllUsers();
+        //    if(users is null)
+        //        return NotFound();
 
-        [HttpGet("inmemorycache")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAllUsersByInMemory()
-        {
-            //check the cache if it has data return cache!..
-            if (_memoryCache.TryGetValue(_cacheKeyInMemory, out IEnumerable<UserDto> userCache))
-            {
-                return Ok(userCache);
-            }
-            else
-            {
-                var users = await _userRepository.GetAllUsers();
-                if (users is null)
-                    return NotFound();
+        //    var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-                var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
-
-                //Start Caching Set
-                var cacheOptions = InMemoryCacheOptions.CacheOptions();
-                _memoryCache.Set(_cacheKeyInMemory, userDto, cacheOptions);
-
-                return Ok(userDto);
-            }
-        }
+        //    return Ok(userDto);            
+        //}
 
 
-        [HttpGet("distributedcache")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAllUsersByDistributed()
-        {
+        //[HttpGet("inmemorycache")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GetAllUsersByInMemory()
+        //{
+        //    //check the cache if it has data return cache!..
+        //    if (_memoryCache.TryGetValue(_cacheKeyInMemory, out IEnumerable<UserDto> userCache))
+        //    {
+        //        return Ok(userCache);
+        //    }
+        //    else
+        //    {
+        //        var users = await _userRepository.GetAllUsers();
+        //        if (users is null)
+        //            return NotFound();
 
-            var userCache= _distributedCache.Get(_cacheKeyDistributed);
-            if (userCache != null)
-            {
-                var serializedUserDtoToRead = Encoding.UTF8.GetString(userCache);
-                var deserializedUserDto = JsonSerializer.Deserialize<IEnumerable<UserDto>>(serializedUserDtoToRead);
-                return Ok(deserializedUserDto);
-            }
-            else
-            {
-                var users = await _userRepository.GetAllUsers();
-                if (users is null)
-                    return NotFound();
+        //        var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
 
-                var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+        //        //Start Caching Set
+        //        var cacheOptions = InMemoryCacheOptions.CacheOptions();
+        //        _memoryCache.Set(_cacheKeyInMemory, userDto, cacheOptions);
 
-                //Start Caching Set
-                var seralizedUserDtoToSet = JsonSerializer.Serialize(userDto);
-                var cacheOptions = DistributedCacheOptions.CacheOptions();
-                _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(seralizedUserDtoToSet), cacheOptions);
+        //        return Ok(userDto);
+        //    }
+        //}
 
-                return Ok(userDto);
-            }
-        
-        }
+
+        //[HttpGet("distributedcache")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GetAllUsersByDistributed()
+        //{
+
+        //    var userCache= _distributedCache.Get(_cacheKeyDistributed);
+        //    if (userCache != null)
+        //    {
+        //        var serializedUserDtoToRead = Encoding.UTF8.GetString(userCache);
+        //        var deserializedUserDto = JsonSerializer.Deserialize<IEnumerable<UserDto>>(serializedUserDtoToRead);
+        //        return Ok(deserializedUserDto);
+        //    }
+        //    else
+        //    {
+        //        var users = await _userRepository.GetAllUsers();
+        //        if (users is null)
+        //            return NotFound();
+
+        //        var userDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
+
+        //        //Start Caching Set
+        //        var seralizedUserDtoToSet = JsonSerializer.Serialize(userDto);
+        //        var cacheOptions = DistributedCacheOptions.CacheOptions();
+        //        _distributedCache.Set(_cacheKeyDistributed, Encoding.UTF8.GetBytes(seralizedUserDtoToSet), cacheOptions);
+
+        //        return Ok(userDto);
+        //    }
+
+        //}
     }
 }
