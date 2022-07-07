@@ -15,8 +15,8 @@ namespace TP.Net.Hw.WebUI.Controllers
         private readonly IMapper _mapper;
         private readonly IUserMessageRepository _repository;
 
-        public MessagesController(IMapper mapper, IUserMessageRepository repository) => (_mapper,_repository) = (mapper,repository);
-        
+        public MessagesController(IMapper mapper, IUserMessageRepository repository) => (_mapper, _repository) = (mapper, repository);
+
 
         [HttpGet]
         public async Task<IActionResult> GetUserMessages([FromQuery] UserMessageQueryDto filterDto)
